@@ -1,32 +1,42 @@
 import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
 
-function Child(props) {
-  console.log("props", props);
-  return (
-    <a
-      className="App-link"
-      href="https://reactjs.org"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Learn React
-    </a>
-  );
+
+class Child extends React.Component {
+  render() {
+    return <div>count from parent component: {this.props.num}</div>;
+  }
 }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Child propa="a" propb={1} />
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+  state = {
+    count: 0,
+    x: 5,
+  };
+
+
+  handleClick = () => {
+    this.setState({
+      count: this.state.count + 1,
+    });
+  };
+
+
+  render() {
+    return (
+      <>
+        <div>{this.state.count}</div>
+        <button onClick={this.handleClick}>plus one</button>
+        <Child num={this.state.count} />
+      </>
+    );
+  }
 }
+
 
 export default App;
+
+
+
