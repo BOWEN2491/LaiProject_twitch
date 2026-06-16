@@ -3,33 +3,67 @@ import "./App.css";
 import React from "react";
 
 
+let intervalID = "";
+
+
 class Child extends React.Component {
+  componentDidMount() {
+    // intervalID = setInterval(() => {
+    //   console.log("interval");
+    // }, 1000);
+    console.log("Child Did Mount");
+  }
+
+
+  componentWillUnmount() {
+    // clearInterval(intervalID);
+    // console.log("child will unmount");
+  }
+
+
   render() {
-    return <div>count from parent component: {this.props.num}</div>;
+    return <div>Child Component</div>;
   }
 }
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("app constructor");
+  }
+
+
+  componentDidMount() {
+    console.log("app did mount");
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("app did update prevProps", prevProps);
+    console.log("app did update prevState", prevState);
+    console.log("app did update");
+  }
+
+
   state = {
-    count: 0,
-    x: 5,
+    showChild: true,
   };
 
 
   handleClick = () => {
     this.setState({
-      count: this.state.count + 1,
+      showChild: !this.state.showChild,
     });
   };
 
 
   render() {
+    console.log("app render");
     return (
       <>
-        <div>{this.state.count}</div>
-        <button onClick={this.handleClick}>plus one</button>
-        <Child num={this.state.count} />
+        <button onClick={this.handleClick}>toggle child</button>
+        {this.state.showChild && <Child />}
       </>
     );
   }
@@ -37,6 +71,3 @@ class App extends React.Component {
 
 
 export default App;
-
-
-
