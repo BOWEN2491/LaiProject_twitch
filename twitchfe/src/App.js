@@ -1,72 +1,36 @@
-import logo from "./logo.svg";
-import "./App.css";
-import React from "react";
+import React from 'react';
+import { Layout } from 'antd';
 
 
-let intervalID = "";
+const { Header, Content, Sider } = Layout;
 
 
-class Child extends React.Component {
-  componentDidMount() {
-    // intervalID = setInterval(() => {
-    //   console.log("interval");
-    // }, 1000);
-    console.log("Child Did Mount");
-  }
-
-
-  componentWillUnmount() {
-    // clearInterval(intervalID);
-    // console.log("child will unmount");
-  }
-
-
-  render() {
-    return <div>Child Component</div>;
-  }
-}
-
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log("app constructor");
-  }
-
-
-  componentDidMount() {
-    console.log("app did mount");
-  }
-
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("app did update prevProps", prevProps);
-    console.log("app did update prevState", prevState);
-    console.log("app did update");
-  }
-
-
-  state = {
-    showChild: true,
-  };
-
-
-  handleClick = () => {
-    this.setState({
-      showChild: !this.state.showChild,
-    });
-  };
-
-
-  render() {
-    console.log("app render");
-    return (
-      <>
-        <button onClick={this.handleClick}>toggle child</button>
-        {this.state.showChild && <Child />}
-      </>
-    );
-  }
+function App() {
+  return (
+    <Layout>
+      <Header>
+        {'Header'}
+      </Header>
+      <Layout>
+        <Sider width={300} className="site-layout-background">
+          {'Sider'}
+        </Sider>
+        <Layout style={{ padding: '24px' }}>
+          <Content
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              margin: 0,
+              height: 800,
+              overflow: 'auto'
+            }}
+          >
+            {'Home'}
+          </Content>
+        </Layout>
+      </Layout>
+    </Layout>
+  )
 }
 
 
