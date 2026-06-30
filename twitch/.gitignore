@@ -39,3 +39,6 @@ out/
 
 ### Local secrets ###
 
+### Local task artifacts ###
+docs/
+docs-source/

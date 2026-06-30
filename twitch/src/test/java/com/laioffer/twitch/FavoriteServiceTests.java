@@ -5,8 +5,10 @@ import com.laioffer.twitch.db.FavoriteRecordRepository;
 import com.laioffer.twitch.db.ItemRepository;
 import com.laioffer.twitch.db.entity.ItemEntity;
 import com.laioffer.twitch.db.entity.UserEntity;
+import com.laioffer.twitch.external.model.Stream;
 import com.laioffer.twitch.favorite.FavoriteService;
 import com.laioffer.twitch.model.ItemType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -87,5 +89,29 @@ public class FavoriteServiceTests {
 
 
         Mockito.verify(favoriteRecordRepository).delete(1L, 2L);
+    }
+
+    @Test
+    public void whenConstructingStreamItem_shouldUseTwitchChannelUrl() {
+        Stream stream = new Stream(
+                "streamId",
+                "userId",
+                "streamer_login",
+                "Streamer Name",
+                "gameId",
+                "Game Name",
+                "live",
+                "title",
+                100,
+                "2026-06-30T00:00:00Z",
+                "en",
+                "thumbnail",
+                java.util.List.of(),
+                false
+        );
+
+        ItemEntity item = new ItemEntity(stream);
+
+        Assertions.assertEquals("https://www.twitch.tv/streamer_login", item.url());
     }
 }

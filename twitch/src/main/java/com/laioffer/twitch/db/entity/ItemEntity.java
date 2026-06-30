@@ -37,6 +37,6 @@ public record ItemEntity(
 
 
     public ItemEntity(Stream stream) {
-        this(null, stream.id(), stream.title(), null, stream.thumbnailUrl(), stream.userName(), stream.gameId(), ItemType.STREAM);
+        this(null, stream.id(), stream.title(), "https://www.twitch.tv/" + stream.userLogin(), stream.thumbnailUrl(), stream.userName(), stream.gameId(), ItemType.STREAM);
     }
 }
